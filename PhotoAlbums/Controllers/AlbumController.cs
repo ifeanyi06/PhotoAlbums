@@ -25,22 +25,21 @@ namespace PhotoAlbums.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<PagedResponse<IEnumerable<AlbumResponse>>> Get([FromQuery] PaginationFilter filter)
+        public async Task<IEnumerable<AlbumResponse>> Get()
         {
-            return await _albumPhotoService.GetAlbumsAsync(filter);
+            return await _albumPhotoService.GetAlbumsAsync();
         }
 
-
         [HttpGet]
-        [Route("GetAlbumPhotos")]
-        public async Task<PagedResponse<IEnumerable<AlbumPhotosResponse>>> GetAlbumPhotos([FromQuery] int albumId, [FromQuery] PaginationFilter filter)
+        [Route("GetAlbumPaged")]
+        public async Task<PagedResponse<IEnumerable<AlbumResponse>>> GetAlbumPaged([FromQuery] PaginationFilter filter)
         {
-            return await _albumPhotoService.GetAlbumPhotosAsync(albumId, filter);
+            return await _albumPhotoService.GetAlbumsPagedAsync(filter);
         }
 
         [HttpGet]
         [Route("GetUserAlbumPhotos")]
-        public async Task<PagedResponse<IEnumerable<AlbumPhotosResponse>>> GetAlbumPhoto([FromQuery] int userId, [FromQuery] PaginationFilter filter)
+        public async Task<PagedResponse<IEnumerable<AlbumResponse>>> GetAlbumPhoto([FromQuery] int userId, [FromQuery] PaginationFilter filter)
         {
             var response = await _albumPhotoService.GetUserAlbumPhotoAsync(userId, filter);
 

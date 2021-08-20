@@ -30,20 +30,6 @@ namespace PhotoAlbums.Test
             _albumController = new AlbumController(_logger.Object, _albumService.Object);
         }
 
-        [Fact]
-        public async void Get_WhenCalled_ReturnsOkResult()
-        {
-
-            // Act
-            var request = new PaginationFilter() { PageNumber = 1, PageSize = 10 };
-            _albumService.Setup(x => x.GetAlbumsAsync(request)).ReturnsAsync(albumList(request));
-
-            // Assert
-            var response = await _albumController.Get(request);
-
-            Assert.NotNull(response);
-            Assert.IsType<PagedResponse<IEnumerable<AlbumResponse>>>(response);
-        }
 
         [Fact]
         public async void GetUserAlbumPhotos_ReturnsOnlyUsersDataOkResult()
@@ -51,13 +37,13 @@ namespace PhotoAlbums.Test
 
             // Act
             var request = new PaginationFilter() { PageNumber = 1, PageSize = 10 };
-            _albumService.Setup(x => x.GetUserAlbumPhotoAsync(5, request)).ReturnsAsync(albumUserList(request));
+            _albumService.Setup(x => x.GetUserAlbumPhotoAsync(5, request)).ReturnsAsync(albumList(request));
 
             // Assert
             var response = await _albumController.GetAlbumPhoto(5,request);
             bool hasRecords = response.Data.Any();
             Assert.NotNull(response);
-            Assert.IsType<PagedResponse<IEnumerable<AlbumPhotosResponse>>>(response);
+            Assert.IsType<PagedResponse<IEnumerable<AlbumResponse>>>(response);
             Assert.True(hasRecords);
         }
 

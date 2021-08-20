@@ -10,10 +10,10 @@ namespace Web.Services
 {
     public interface IAlbumPhotoService
     {
-        Task<PagedResponse<IEnumerable<AlbumResponse>>> GetAlbumsAsync(PaginationFilter param);
-        Task<Album> GetAlbumAsync(int albumId);
-        Task<PagedResponse<IEnumerable<AlbumPhotosResponse>>> GetAlbumPhotosAsync(int albumId, PaginationFilter param);
-        Task<PagedResponse<IEnumerable<AlbumPhotosResponse>>> GetUserAlbumPhotoAsync(int userId, PaginationFilter param);
+        Task<IEnumerable<AlbumResponse>> GetAlbumsAsync();
+        Task<PagedResponse<IEnumerable<AlbumResponse>>> GetAlbumsPagedAsync(PaginationFilter param);
+        Task<AlbumResponse> GetAlbumAsync(int albumId);
+        Task<PagedResponse<IEnumerable<AlbumResponse>>> GetUserAlbumPhotoAsync(int userId, PaginationFilter param);
         Task<PagedResponse<IEnumerable<AlbumPhotoStatsResponse>>> GetAlbumPhotoStatsAsync(PaginationFilter param);
     }
 }

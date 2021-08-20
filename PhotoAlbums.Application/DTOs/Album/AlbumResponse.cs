@@ -11,5 +11,7 @@ namespace Application.DTOs.Album
         public int UserId { get; set; }
         public int Id { get; set; }
         public string Title { get; set; }
+        public IEnumerable<AlbumPhotosResponse> Photos { get; set; }
+
     }
 }
